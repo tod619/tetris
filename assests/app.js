@@ -50,11 +50,16 @@ let currentRotation = 0;
 let random = Math.floor(Math.random() * theTetrominoes.length);
 let current = theTetrominoes[random][currentRotation];
 
-// Draw the first rotation in the first tetromino
+// Draw the tetrominoes
 function draw() {
     current.forEach(index => {
         squares[currentPosition + index].classList.add('tetromino');
     })
 }
 
-draw();
+// Undraw the tetrominoes
+function undraw() {
+    current.forEach(index => {
+        squares[currentPosition + index].classList.remove('tetromino');
+    })
+}
