@@ -67,6 +67,15 @@ function undraw() {
 // Make the tetrominoes move down the grid
 timerId = setInterval(moveDown, 1000);
 
+// assign functions to keycodes
+function control(e) {
+	if (e.keyCode === 37) {
+		moveLeft();
+	}
+}
+
+document.addEventListener('keyup', control);
+
 // moveDown function
 function moveDown() {
 	undraw();
