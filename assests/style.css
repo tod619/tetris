@@ -1,3 +1,8 @@
+.container {
+    display: flex;
+
+}
+
 .grid {
     width: 200px;
     height: 400px;
@@ -24,6 +29,7 @@
     display: flex;
     flex-wrap: wrap;
     background-color: yellow;
+    margin-left: 50px;
 }
 
 .mini-grid div {
