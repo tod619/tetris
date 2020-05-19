@@ -71,6 +71,14 @@ timerId = setInterval(moveDown, 1000);
 function control(e) {
 	if (e.keyCode === 37) {
 		moveLeft();
+	} else if (e.keyCode === 38) {
+		// rotate
+	} else if (e.keyCode === 39) {
+		// move Right
+		moveRight();
+	} else if (e.keyCode === 40) {
+		// move down but faster
+		moveDown();
 	}
 }
 
@@ -106,6 +114,21 @@ function moveLeft() {
 
 	if (current.some((index) => squares[currentPosition + index].classList.contains('taken'))) {
 		currentPosition += 1;
+	}
+
+	draw();
+}
+
+// move the terromino rigth unless it is at the edge or there is a blockage
+function moveRight() {
+	undraw();
+
+	const isAtRightEdge = current.some((index) => (currentPosition + index) % width === width - 1);
+
+	if (!isAtRightEdge) currentPosition += 1;
+
+	if (current.some((index) => squares[currentPosition + index].classList.contains('taken'))) {
+		currentPosition -= 1;
 	}
 
 	draw();
