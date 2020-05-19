@@ -4,6 +4,7 @@ let squares = Array.from(document.querySelectorAll('.grid div'));
 const scoreDisplay = document.querySelector('#score');
 const startBtn = document.querySelector('#start-button');
 const width = 10;
+let nextRandom = 0;
 
 // The tetrominoes
 const lTetromino = [
@@ -98,10 +99,12 @@ function freeze() {
 	if (current.some((index) => squares[currentPosition + index + width].classList.contains('taken'))) {
 		current.forEach((index) => squares[currentPosition + index].classList.add('taken'));
 		// Start a new tetromino falling
-		random = Math.floor(Math.random() * theTetrominoes.length);
+		random = nextRandom;
+		nextRandom = Math.floor(Math.random() * theTetrominoes.length);
 		current = theTetrominoes[random][currentRotation];
 		currentPosition = 4;
 		draw();
+		displayShape();
 	}
 }
 
@@ -148,4 +151,34 @@ function rotate() {
 	current = theTetrominoes[random][currentRotation];
 
 	draw();
+}
+
+// show up-next tetromino in mini-grid
+const displaySquares = document.querySelectorAll('.mini-grid div');
+const displayWidth = 4;
+let displayIndex = 0;
+
+//the tetrominos without rotations
+const upNextTetrominoes = [
+	// L tetromino
+	[ 1, displayWidth + 1, displayWidth * 2 + 1, 2 ],
+	// z tetromino
+	[ 0, displayWidth, displayWidth + 1, displayWidth * 2 + 1 ],
+	//T tetromino
+	[ 1, displayWidth, displayWidth + 1, displayWidth + 2 ],
+	//O tetromino
+	[ 0, 1, displayWidth, displayWidth + 1 ],
+	// I Tetromino
+	[ 1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1 ]
+];
+
+// Display the up next tetromino in the mini gird
+function displayShape() {
+	displaySquares.forEach((square) => {
+		square.classList.remove('tetromino');
+	});
+
+	upNextTetrominoes[nextRandom].forEach((index) => {
+		displaySquares[displayIndex + index].classList.add('tetromino');
+	});
 }
