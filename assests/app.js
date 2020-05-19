@@ -73,6 +73,7 @@ function control(e) {
 		moveLeft();
 	} else if (e.keyCode === 38) {
 		// rotate
+		rotate();
 	} else if (e.keyCode === 39) {
 		// move Right
 		moveRight();
@@ -130,6 +131,21 @@ function moveRight() {
 	if (current.some((index) => squares[currentPosition + index].classList.contains('taken'))) {
 		currentPosition -= 1;
 	}
+
+	draw();
+}
+
+// rotate the tetromino
+function rotate() {
+	undraw();
+
+	currentRotation++;
+
+	if (currentRotation === current.length) {
+		currentRotation = 0;
+	}
+
+	current = theTetrominoes[random][currentRotation];
 
 	draw();
 }
